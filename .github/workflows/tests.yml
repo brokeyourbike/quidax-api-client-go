@@ -1,0 +1,28 @@
+name: tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-go@v4
+      with:
+        go-version-file: 'go.mod'
+    - uses: brokeyourbike/go-mockery-action@v0.1
+      with:
+        mockery-version: '2.53.3'
+    - run: make mock
+    - run: go build -v ./...
+    - run: go test -race -covermode=atomic -coverprofile=coverage.out -v ./...
+
+    - uses: codecov/codecov-action@v3
+      continue-on-error: true

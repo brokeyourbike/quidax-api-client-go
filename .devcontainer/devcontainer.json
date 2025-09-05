@@ -1,0 +1,21 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/go
+{
+    "name": "quidax-api-client-go",
+    "image": "mcr.microsoft.com/devcontainers/go:1.24",
+    "features": {
+        "ghcr.io/brokeyourbike/devcontainer-features/staticcheck:0": {
+            "version": "2025.1.1"
+        },
+        "ghcr.io/brokeyourbike/devcontainer-features/mockery-go:0": {
+            "version": "2.53.3"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "golang.Go"
+            ]
+        }
+    }
+}
