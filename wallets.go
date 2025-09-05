@@ -50,8 +50,11 @@ type WalletResponse struct {
 }
 
 type WalletsClient interface {
-	FetchWallet(ctx context.Context, id uuid.UUID) (WalletResponse, error)
-	FetchWallets(ctx context.Context, page int) (WalletsResponse, error)
+	FetchWallet(ctx context.Context, id uuid.UUID, currency string) (WalletResponse, error)
+	FetchWallets(ctx context.Context, id uuid.UUID) (WalletsResponse, error)
+	FetchWalletAddress(ctx context.Context, id uuid.UUID, currency string) (data WalletAddressResponse, err error)
+	FetchWalletAddresses(ctx context.Context, id uuid.UUID, currency string) (data WalletAddressesResponse, err error)
+	RequestWalletAddress(ctx context.Context, id uuid.UUID, currency, network string) (data WalletAddressResponse, err error)
 }
 
 func (c *client) FetchWallet(ctx context.Context, id uuid.UUID, currency string) (data WalletResponse, err error) {
