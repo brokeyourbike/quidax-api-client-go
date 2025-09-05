@@ -81,3 +81,61 @@ func (c *client) FetchWallets(ctx context.Context, id uuid.UUID) (data WalletsRe
 	req.ExpectStatus(http.StatusOK)
 	return data, c.do(ctx, req)
 }
+
+type WalletAddressData struct {
+	ID             uuid.UUID `json:"id"`
+	Currency       string    `json:"currency"`
+	Address        string    `json:"address"`
+	Network        string    `json:"network"`
+	Reference      string    `json:"reference"`
+	DestinationTag string    `json:"destination_tag"`
+}
+
+type WalletAddressResponse struct {
+	Status  string            `json:"status"`
+	Message string            `json:"message"`
+	Data    WalletAddressData `json:"data"`
+}
+
+func (c *client) FetchWalletAddress(ctx context.Context, id uuid.UUID, currency string) (data WalletAddressResponse, err error) {
+	req, err := c.newRequest(ctx, http.MethodGet, fmt.Sprintf("/v1/users/%s/wallets/%s/address", id, currency), nil)
+	if err != nil {
+		return data, fmt.Errorf("failed to create request: %w", err)
+	}
+
+	req.DecodeTo(&data)
+	req.ExpectStatus(http.StatusOK)
+	return data, c.do(ctx, req)
+}
+
+type WalletAddressesResponse struct {
+	Status  string              `json:"status"`
+	Message string              `json:"message"`
+	Data    []WalletAddressData `json:"data"`
+}
+
+func (c *client) FetchWalletAddresses(ctx context.Context, id uuid.UUID, currency string) (data WalletAddressesResponse, err error) {
+	req, err := c.newRequest(ctx, http.MethodGet, fmt.Sprintf("/v1/users/%s/wallets/%s/addresses", id, currency), nil)
+	if err != nil {
+		return data, fmt.Errorf("failed to create request: %w", err)
+	}
+
+	req.DecodeTo(&data)
+	req.ExpectStatus(http.StatusOK)
+	return data, c.do(ctx, req)
+}
+
+func (c *client) RequestWalletAddress(ctx context.Context, id uuid.UUID, currency, network string) (data WalletAddressResponse, err error) {
+	req, err := c.newRequest(ctx, http.MethodPost, fmt.Sprintf("/v1/users/%s/wallets/%s/address", id, currency), nil)
+	if err != nil {
+		return data, fmt.Errorf("failed to create request: %w", err)
+	}
+
+	if network != "" {
+		req.AddQueryParam("network", network)
+	}
+
+	req.DecodeTo(&data)
+	req.ExpectStatus(http.StatusOK)
+	return data, c.do(ctx, req)
+}
