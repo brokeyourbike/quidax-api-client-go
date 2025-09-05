@@ -1,0 +1,26 @@
+{
+    "status": "success",
+    "message": "Successful",
+    "data": [{
+        "id": "51280194-a456-4217-975e-0e7411a7f83d",
+        "reference": null,
+        "currency": "btc",
+        "address": "dummyaddress",
+        "network": "btc",
+        "user": {
+            "id": "8269672d-d451-4ad2-88ac-bd70f1133615",
+            "sn": "01K4CR9S9MRFQH4ZXEHX8MP70P",
+            "email": "john@doe.com",
+            "reference": null,
+            "first_name": "TEST",
+            "last_name": "TEST",
+            "display_name": "Example LTD",
+            "created_at": "2025-07-25T22:06:08.000Z",
+            "updated_at": "2025-07-25T22:06:44.000Z"
+        },
+        "destination_tag": null,
+        "total_payments": null,
+        "created_at": "2025-09-05T12:20:22.000Z",
+        "updated_at": "2025-09-05T12:24:29.000Z"
+    }]
+}
