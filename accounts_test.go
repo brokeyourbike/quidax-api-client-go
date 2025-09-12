@@ -61,7 +61,7 @@ func TestCreateAccount_Success(t *testing.T) {
 	mockHttpClient := quidax.NewMockHttpClient(t)
 	client := quidax.NewClient("token", quidax.WithHTTPClient(mockHttpClient))
 
-	resp := &http.Response{StatusCode: http.StatusOK, Body: io.NopCloser(bytes.NewReader(accountsFetchMeOK))}
+	resp := &http.Response{StatusCode: http.StatusCreated, Body: io.NopCloser(bytes.NewReader(accountsFetchMeOK))}
 	mockHttpClient.On("Do", mock.AnythingOfType("*http.Request")).Return(resp, nil).Once()
 
 	got, err := client.CreateAccount(context.TODO(), quidax.CreateAccountPayload{})
