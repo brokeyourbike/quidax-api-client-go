@@ -1,5 +1,13 @@
 # Changelog
 
+### [0.1.1](https://www.github.com/brokeyourbike/quidax-api-client-go/compare/v0.1.0...v0.1.1) (2025-09-12)
+
+
+### Bug Fixes
+
+* 201 ([ac7b97b](https://www.github.com/brokeyourbike/quidax-api-client-go/commit/ac7b97b7b77af499e879e988472879951368d4e7))
+* 201 ([abf55de](https://www.github.com/brokeyourbike/quidax-api-client-go/commit/abf55de9a74cd289844b142e5d9dc3b8fddf714e))
+
 ## 0.1.0 (2025-09-05)
 
 
