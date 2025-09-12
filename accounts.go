@@ -88,7 +88,7 @@ func (c *client) CreateAccount(ctx context.Context, payload CreateAccountPayload
 		return data, fmt.Errorf("failed to create request: %w", err)
 	}
 
-	req.ExpectStatus(http.StatusOK)
+	req.ExpectStatus(http.StatusCreated)
 	req.DecodeTo(&data)
 	return data, c.do(ctx, req)
 }
