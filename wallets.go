@@ -139,6 +139,6 @@ func (c *client) RequestWalletAddress(ctx context.Context, id uuid.UUID, currenc
 	}
 
 	req.DecodeTo(&data)
-	req.ExpectStatus(http.StatusOK)
+	req.ExpectStatus(http.StatusCreated)
 	return data, c.do(ctx, req)
 }
