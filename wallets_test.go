@@ -82,7 +82,7 @@ func TestRequestWalletAddress_Success(t *testing.T) {
 	mockHttpClient := quidax.NewMockHttpClient(t)
 	client := quidax.NewClient("token", quidax.WithHTTPClient(mockHttpClient))
 
-	resp := &http.Response{StatusCode: http.StatusOK, Body: io.NopCloser(bytes.NewReader(walletsAddressFetchBtcOk))}
+	resp := &http.Response{StatusCode: http.StatusCreated, Body: io.NopCloser(bytes.NewReader(walletsAddressFetchBtcOk))}
 	mockHttpClient.On("Do", mock.AnythingOfType("*http.Request")).Return(resp, nil).Once()
 
 	got, err := client.RequestWalletAddress(context.TODO(), uuid.New(), "btc", "bep20")
