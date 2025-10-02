@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/google/uuid"
 )
@@ -58,7 +59,7 @@ type WalletsClient interface {
 }
 
 func (c *client) FetchWallet(ctx context.Context, id uuid.UUID, currency string) (data WalletResponse, err error) {
-	req, err := c.newRequest(ctx, http.MethodGet, fmt.Sprintf("/v1/users/%s/wallets/%s", id, currency), nil)
+	req, err := c.newRequest(ctx, http.MethodGet, fmt.Sprintf("/v1/users/%s/wallets/%s", id, strings.ToLower(currency)), nil)
 	if err != nil {
 		return data, fmt.Errorf("failed to create request: %w", err)
 	}
@@ -101,7 +102,7 @@ type WalletAddressResponse struct {
 }
 
 func (c *client) FetchWalletAddress(ctx context.Context, id uuid.UUID, currency string) (data WalletAddressResponse, err error) {
-	req, err := c.newRequest(ctx, http.MethodGet, fmt.Sprintf("/v1/users/%s/wallets/%s/address", id, currency), nil)
+	req, err := c.newRequest(ctx, http.MethodGet, fmt.Sprintf("/v1/users/%s/wallets/%s/address", id, strings.ToLower(currency)), nil)
 	if err != nil {
 		return data, fmt.Errorf("failed to create request: %w", err)
 	}
@@ -118,7 +119,7 @@ type WalletAddressesResponse struct {
 }
 
 func (c *client) FetchWalletAddresses(ctx context.Context, id uuid.UUID, currency string) (data WalletAddressesResponse, err error) {
-	req, err := c.newRequest(ctx, http.MethodGet, fmt.Sprintf("/v1/users/%s/wallets/%s/addresses", id, currency), nil)
+	req, err := c.newRequest(ctx, http.MethodGet, fmt.Sprintf("/v1/users/%s/wallets/%s/addresses", id, strings.ToLower(currency)), nil)
 	if err != nil {
 		return data, fmt.Errorf("failed to create request: %w", err)
 	}
@@ -129,7 +130,7 @@ func (c *client) FetchWalletAddresses(ctx context.Context, id uuid.UUID, currenc
 }
 
 func (c *client) RequestWalletAddress(ctx context.Context, id uuid.UUID, currency, network string) (data WalletAddressResponse, err error) {
-	req, err := c.newRequest(ctx, http.MethodPost, fmt.Sprintf("/v1/users/%s/wallets/%s/address", id, currency), nil)
+	req, err := c.newRequest(ctx, http.MethodPost, fmt.Sprintf("/v1/users/%s/wallets/%s/addresses", id, strings.ToLower(currency)), nil)
 	if err != nil {
 		return data, fmt.Errorf("failed to create request: %w", err)
 	}
