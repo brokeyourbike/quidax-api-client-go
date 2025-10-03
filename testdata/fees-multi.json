@@ -1,0 +1,51 @@
+{
+  "status": "success",
+  "message": "Successful",
+  "data": {
+    "fee": [
+      {
+        "min": 0,
+        "max": 0.0054,
+        "type": "flat",
+        "value": 0.0002
+      },
+      {
+        "min": 0.0054,
+        "max": 0.0136,
+        "type": "flat",
+        "value": 0.0002
+      },
+      {
+        "min": 0.0136,
+        "max": 0.0271,
+        "type": "flat",
+        "value": 0.0003
+      },
+      {
+        "min": 0.0271,
+        "max": 0.0813,
+        "type": "flat",
+        "value": 0.0004
+      },
+      {
+        "min": 0.0813,
+        "max": 0.2033,
+        "type": "flat",
+        "value": 0.0004
+      },
+      {
+        "min": 0.2033,
+        "max": 2,
+        "type": "flat",
+        "value": 0.0004
+      },
+      {
+        "min": 2,
+        "max": 10.0001,
+        "type": "flat",
+        "value": 0.0005
+      }
+    ],
+    "type": "range"
+  }
+}

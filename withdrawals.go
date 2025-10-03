@@ -48,7 +48,7 @@ func (c *client) CreateWithdrawal(ctx context.Context, userID uuid.UUID, payload
 	return data, c.do(ctx, req)
 }
 
-type FeeData struct {
+type Fee struct {
 	Min   float64 `json:"min"`
 	Max   float64 `json:"max"`
 	Type  string  `json:"type"`
@@ -60,23 +60,28 @@ type OneFeeData struct {
 	Value float64 `json:"fee"`
 }
 
+type MultiFeeData struct {
+	Type string `json:"type"`
+	Fees []Fee  `json:"fee"`
+}
+
 type FeesResponse struct {
 	Status  string          `json:"status"`
 	Message string          `json:"message"`
 	Data    json.RawMessage `json:"data"`
 }
 
-func (r FeesResponse) GetFees() []FeeData {
-	fees := make([]FeeData, 0)
+func (r FeesResponse) GetFees() []Fee {
+	fees := make([]Fee, 0)
 
 	var one OneFeeData
 	if err := json.Unmarshal(r.Data, &one); err == nil {
-		fees = append(fees, FeeData{Type: one.Type, Value: one.Value})
-	} else {
-		var multi []FeeData
-		if err := json.Unmarshal(r.Data, &multi); err == nil {
-			fees = append(fees, multi...)
-		}
+		fees = append(fees, Fee{Type: one.Type, Value: one.Value})
+	}
+
+	var multi MultiFeeData
+	if err := json.Unmarshal(r.Data, &multi); err == nil {
+		fees = append(fees, multi.Fees...)
 	}
 
 	return fees

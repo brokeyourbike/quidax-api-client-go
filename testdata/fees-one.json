@@ -1,0 +1,8 @@
+{
+  "status": "success",
+  "message": "Successful",
+  "data": {
+    "fee": 1,
+    "type": "flat"
+  }
+}
