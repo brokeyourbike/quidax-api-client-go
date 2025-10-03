@@ -22,6 +22,7 @@ type HttpClient interface {
 type Client interface {
 	AccountsClient
 	WalletsClient
+	WithdrawalsClient
 }
 
 var _ Client = (*client)(nil)
