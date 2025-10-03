@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://www.github.com/brokeyourbike/quidax-api-client-go/compare/v0.2.0...v0.3.0) (2025-10-03)
+
+
+### Features
+
+* fees ([1a8df5c](https://www.github.com/brokeyourbike/quidax-api-client-go/commit/1a8df5c2b2d4f995daaaa4af25fac383c289f48a))
+* fees ([c494f35](https://www.github.com/brokeyourbike/quidax-api-client-go/commit/c494f351704ae9cc75b2af1858c5dbd3a7b0d634))
+
 ## [0.2.0](https://www.github.com/brokeyourbike/quidax-api-client-go/compare/v0.1.3...v0.2.0) (2025-10-03)
 
 
