@@ -23,6 +23,7 @@ type Client interface {
 	AccountsClient
 	WalletsClient
 	WithdrawalsClient
+	SwapClient
 }
 
 var _ Client = (*client)(nil)
