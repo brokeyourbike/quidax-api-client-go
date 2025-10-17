@@ -66,6 +66,6 @@ func (c *client) ConfirmQuote(ctx context.Context, userID, quoteID uuid.UUID) er
 		return fmt.Errorf("failed to create request: %w", err)
 	}
 
-	req.ExpectStatus(http.StatusOK)
+	req.ExpectStatus(http.StatusCreated)
 	return c.do(ctx, req)
 }
