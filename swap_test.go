@@ -36,7 +36,7 @@ func TestConfirmQuote_Success(t *testing.T) {
 	mockHttpClient := quidax.NewMockHttpClient(t)
 	client := quidax.NewClient("token", quidax.WithHTTPClient(mockHttpClient))
 
-	resp := &http.Response{StatusCode: http.StatusOK, Body: io.NopCloser(bytes.NewReader(swapQuoteOk))}
+	resp := &http.Response{StatusCode: http.StatusCreated, Body: io.NopCloser(bytes.NewReader(swapQuoteOk))}
 	mockHttpClient.On("Do", mock.AnythingOfType("*http.Request")).Return(resp, nil).Once()
 
 	err := client.ConfirmQuote(context.TODO(), uuid.New(), uuid.New())
