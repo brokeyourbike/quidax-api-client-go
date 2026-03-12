@@ -12,6 +12,7 @@ import (
 
 type SwapClient interface {
 	Quote(ctx context.Context, userID uuid.UUID, payload QuotePayload) (QuoteResponse, error)
+	TemporaryQuote(ctx context.Context, userID uuid.UUID, payload QuotePayload) (data QuoteResponse, err error)
 	ConfirmQuote(ctx context.Context, userID, quoteID uuid.UUID) error
 }
 
@@ -51,6 +52,17 @@ type QuoteResponse struct {
 
 func (c *client) Quote(ctx context.Context, userID uuid.UUID, payload QuotePayload) (data QuoteResponse, err error) {
 	req, err := c.newRequest(ctx, http.MethodPost, fmt.Sprintf("/v1/users/%s/swap_quotation", userID), payload)
+	if err != nil {
+		return data, fmt.Errorf("failed to create request: %w", err)
+	}
+
+	req.ExpectStatus(http.StatusCreated)
+	req.DecodeTo(&data)
+	return data, c.do(ctx, req)
+}
+
+func (c *client) TemporaryQuote(ctx context.Context, userID uuid.UUID, payload QuotePayload) (data QuoteResponse, err error) {
+	req, err := c.newRequest(ctx, http.MethodPost, fmt.Sprintf("/v1/users/%s/temporary_swap_quotation", userID), payload)
 	if err != nil {
 		return data, fmt.Errorf("failed to create request: %w", err)
 	}

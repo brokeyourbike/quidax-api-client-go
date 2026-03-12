@@ -32,6 +32,20 @@ func TestQuote_Success(t *testing.T) {
 	assert.Equal(t, 0.00034847, got.Data.GetToAmount())
 }
 
+func TestTemporaryQuote_Success(t *testing.T) {
+	mockHttpClient := quidax.NewMockHttpClient(t)
+	client := quidax.NewClient("token", quidax.WithHTTPClient(mockHttpClient))
+
+	resp := &http.Response{StatusCode: http.StatusCreated, Body: io.NopCloser(bytes.NewReader(swapQuoteOk))}
+	mockHttpClient.On("Do", mock.AnythingOfType("*http.Request")).Return(resp, nil).Once()
+
+	got, err := client.TemporaryQuote(context.TODO(), uuid.New(), quidax.QuotePayload{})
+	require.NoError(t, err)
+	assert.Equal(t, "success", got.Status)
+	assert.Equal(t, 0.01, got.Data.GetFromAmount())
+	assert.Equal(t, 0.00034847, got.Data.GetToAmount())
+}
+
 func TestConfirmQuote_Success(t *testing.T) {
 	mockHttpClient := quidax.NewMockHttpClient(t)
 	client := quidax.NewClient("token", quidax.WithHTTPClient(mockHttpClient))
